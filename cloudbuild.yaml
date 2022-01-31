@@ -20,9 +20,9 @@ steps:
     - '--platform'
     - 'managed'
     - '--min-instances'
-    - '0'
-    - '--max-instances'
     - '1'
+    - '--max-instances'
+    - '100'
     - '--allow-unauthenticated'
 images:
 - 'asia-south2-docker.pkg.dev/$PROJECT_ID/my-cloudrun-repo/cloudrun-test'
