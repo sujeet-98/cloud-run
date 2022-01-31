@@ -1,20 +1,28 @@
- steps:
- # Build the container image
- - name: 'gcr.io/cloud-builders/docker'
-   args: ['build', '-t', 'asia-south2-docker.pkg.dev/$PROJECT_ID/my-cloudrun-repo/Cloud-runtest:$COMMIT_SHA', '.']
- # Push the container image to Container Registry
- - name: 'gcr.io/cloud-builders/docker'
-   args: ['push', 'asia-south2-docker.pkg.dev/$PROJECT_ID/my-cloudrun-repo/Cloud-runtest:$COMMIT_SHA']
- # Deploy container image to Cloud Run
- - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-   entrypoint: gcloud
-   args:
-   - 'run'
-   - 'deploy'
-   - 'Cloud-runtest'
-   - '--image'
-   - 'asia-south2-docker.pkg.dev/$PROJECT_ID/my-cloudrun-repo/Cloud-runtest:$COMMIT_SHA'
-   - '--region'
-   - 'asia-south2'
- images:
- - 'asia-south2-docker.pkg.dev/$PROJECT_ID/my-cloudrun-repo/Cloud-runtest'
+steps:
+# Build the container image
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'asia-south2-docker.pkg.dev/$PROJECT_ID/my-cloudrun-repo/cloudrun-test:$COMMIT_SHA', '.']
+# Push the container image to Container Registry
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'asia-south2-docker.pkg.dev/$PROJECT_ID/my-cloudrun-repo/cloudrun-test:$COMMIT_SHA']
+# Deploy container image to Cloud Run
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: gcloud
+  args:
+    - 'beta'
+    - 'run'
+    - 'deploy'
+    - 'cloudrun-test'
+    - '--image'
+    - 'asia-south2-docker.pkg.dev/$PROJECT_ID/my-cloudrun-repo/cloudrun-test:$COMMIT_SHA'
+    - '--region'
+    - 'asia-south2'
+    - '--platform'
+    - 'managed'
+    - '--min-instances'
+    - '0'
+    - '--max-instances'
+    - '1'
+    - '--allow-unauthenticated'
+images:
+- 'asia-south2-docker.pkg.dev/$PROJECT_ID/my-cloudrun-repo/cloudrun-test'
