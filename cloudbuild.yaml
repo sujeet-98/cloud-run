@@ -16,6 +16,5 @@
    - 'gcr.io/$PROJECT_ID/Cloud-runtest:$COMMIT_SHA'
    - '--region'
    - 'asia-south2'
-   -'--allow-unauthenticated'
  images:
  - 'gcr.io/$PROJECT_ID/Cloud-runtest:$COMMIT_SHA'
